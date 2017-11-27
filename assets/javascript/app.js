@@ -12,8 +12,8 @@ const trivia = {
 			correctAnswer: 1,
 		},
 		{
-			question: "",
-			options: ["", "", "", ""],
+			question: "2.",
+			options: ["A", "B", "C", "D"],
 			correctAnswer: 1
 		},
 		{
@@ -44,19 +44,30 @@ const trivia = {
       }
 	},
 	start () {
-	  
 	  $("#question").html("<div>" + trivia.QA[trivia.questionNum]["question"] + "</div>");
+	  var sequence = trivia.sequenceGenerate (trivia.QA[trivia.questionNum]["options"].length);
 	  for (var i = 0; i < trivia.QA[trivia.questionNum]["options"].length; i++) {
-	    $("#question").append("<div>" + trivia.QA[trivia.questionNum]["options"][i] + "</div>")
+	    $("#question").append("<div>" + trivia.QA[trivia.questionNum]["options"][sequence[i]] + "</div>")
 	  }
 
 	  trivia.timer(10); //set clock time.
+
+	  trivia.questionNum++;
 	},
 	timeout () {
 	  $("#time").text("out of time!");
 	  $("#time").click(function () {
 	  	trivia.start();
 	  });
+	},
+	sequenceGenerate (num) { //shuffle and return a sequence array
+	  var x = 0;
+	  var result = Array.from({length: num}, () => x++);
+	  for (var i = num - 1; i > 0; i--) {
+	  	const j = Math.floor(Math.random() * (i + 1));
+	  	[result[i], result[j]] = [result[j], result[i]];
+	  }
+	  return result;
 	}
 }
 
