@@ -45,11 +45,13 @@ const trivia = {
 	},
 	start () {
 	  $("#question").html("<div>" + trivia.QA[trivia.questionNum]["question"] + "</div>");
-	  var sequence = trivia.sequenceGenerate (trivia.QA[trivia.questionNum]["options"].length);
-	  for (var i = 0; i < trivia.QA[trivia.questionNum]["options"].length; i++) {
-	    $("#question").append("<div>" + trivia.QA[trivia.questionNum]["options"][sequence[i]] + "</div>")
-	  }
+	  var options = [...trivia.QA[trivia.questionNum]["options"]];
+	  var sequence = trivia.sequenceGenerate (options.length);
 
+	  for (var i = 0; i < options.length; i++) {
+	  	var addLine = $("<div>" + options[sequence[i]] + "</div>").attr("data-option", sequence[i]);
+	    $("#question").append(addLine); 
+	  }
 	  trivia.timer(10); //set clock time.
 
 	  trivia.questionNum++;
