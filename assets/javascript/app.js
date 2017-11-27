@@ -4,62 +4,66 @@ const trivia = {
 	unanswered : 0,
 	clockRunning : false,
 	questionNum : 0,
-	intervalId,
+	intervalId : 0,
 	QA : [
 		{
 			question: "1.",
-			A: "",
-			B: "",
-			C: "",
-			D: "",
-			correctAnswer: ""
+			options: ["A", "B", "C", "D"],
+			correctAnswer: 1,
 		},
 		{
 			question: "",
-			A: "",
-			B: "",
-			C: "",
-			D: "",
-			correctAnswer: ""
+			options: ["", "", "", ""],
+			correctAnswer: 1
 		},
 		{
 			question: "",
-			A: "",
-			B: "",
-			C: "",
-			D: "",
-			correctAnswer: ""
+			options: ["", "", "", ""],
+			correctAnswer: 1,
 		},
 		{
 			question: "",
-			A: "",
-			B: "",
-			C: "",
-			D: "",
-			correctAnswer: ""
+			options: ["", "", "", ""],
+			correctAnswer: 1,
 		},
 	],
 	timer (time) {
 	  var remainingTime = time;
 	  if (!trivia.clockRunning) {
-        trivia.intervalId = setInterval( function () {
+        trivia.intervalId = setInterval(function () {
+          $("#time").text("Time Remaining: " + remainingTime + " Seconds");
           remainingTime --;
-          $("#time").text("Time Remaining: " + remainingTime + "Seconds");
+          //console.log(remainingTime);
+          if(remainingTime < 0) {
+      	    clearInterval(trivia.intervalId);
+      	    trivia.clockRunning = false;
+      	    return trivia.timeout();
+          }
         }, 1000);
         trivia.clockRunning = true;
       }
 	},
 	start () {
-	  $("#start").hide();
-	  $("#question").html("<div>" + trivia.QA[questionNum]["question"] + "</div>");
-	  $("#question").append("<div>" + trivia.QA[questionNum]["A"] + "</div>");
-	  $("#question").append("<div>" + trivia.QA[questionNum]["B"] + "</div>");
-	  $("#question").append("<div>" + trivia.QA[questionNum]["C"] + "</div>");
-	  $("#question").append("<div>" + trivia.QA[questionNum]["D"] + "</div>");
+	  
+	  $("#question").html("<div>" + trivia.QA[trivia.questionNum]["question"] + "</div>");
+	  for (var i = 0; i < trivia.QA[trivia.questionNum]["options"].length; i++) {
+	    $("#question").append("<div>" + trivia.QA[trivia.questionNum]["options"][i] + "</div>")
+	  }
+
+	  trivia.timer(10); //set clock time.
+	},
+	timeout () {
+	  $("#time").text("out of time!");
+	  $("#time").click(function () {
+	  	trivia.start();
+	  });
 	}
 }
 
-$(document).ready(function() {
-  
+$(document).ready(function () {
+  $("#start").click(function () {
+    $("#start").hide();
+  	trivia.start();
+  });
 
 })
