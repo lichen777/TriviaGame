@@ -1,30 +1,45 @@
 const trivia = {
 	correctCount : 0,
 	incorrectCount : 0,
-	unanswered : 10,
+	unanswered : 0,
 	clockRunning : false,
 	questionNum : 0,
 	intervalId : 0,
 	QA : [
 		{
-			question: "1.",
-			options: ["A", "B", "C", "D"],
-			correctAnswer: 1,
+			question: "The city of Maracaibo and its lake are in what country?",
+			options: ["Morocco", "Spain", "Venezuela", "Colombia"],
+			correctAnswer: 2,
 		},
 		{
-			question: "2.",
-			options: ["A", "B", "C", "D"],
-			correctAnswer: 1
+			question: "What range of hills runs 50 miles from the Worcestershire border through Gloucestershire to the Avon?",
+			options: ["Caucasus Mountains", "Pennines", "Carpathian Mountains", "Cotswolds"],
+			correctAnswer: 3,
 		},
 		{
-			question: "",
-			options: ["", "", "", ""],
-			correctAnswer: 1,
+			question: "Which of these states of the USA extends the furthest north?",
+			options: ["Vermont", "Texas", "New Mexico", "Florida"],
+			correctAnswer: 0,
 		},
 		{
-			question: "",
-			options: ["", "", "", ""],
-			correctAnswer: 1,
+			question: "Which of these places is furthest from Perth, Australia?",
+			options: ["Beijing, China", "Bangkok, Thailand", "Tokyo, Japan", "Mumbai, India"],
+			correctAnswer: 0,
+		},
+		{
+			question: "What is the deepest known part of the world's oceans, and the deepest location on the surface of the Earth's crust?",
+			options: ["The Kate Gully", "The Josephine Ditch", "The Mariana Trench", "The Emma Furrow"],
+			correctAnswer: 2,
+		},
+		{
+			question: "The north of which country falls within the Sahel?",
+			options: ["Burkina Faso", "South Africa", "Libya", "Zimbabwe"],
+			correctAnswer: 0,
+		},
+		{
+			question: "Where is the Gulf of Ob?",
+			options: ["Barents Sea", "Sea of Okhotsk", "Lake Balkhash", "Kara Sea"],
+			correctAnswer: 3,
 		},
 	],
 	timer (time) {
@@ -54,13 +69,11 @@ const trivia = {
 	  }
 	  trivia.timer(10); //set clock time.
 	  trivia.makeChoice();
-	  trivia.questionNum++;
 	},
 	makeChoice () {
 	  $(".choice").click(function () {
 	  	clearInterval(trivia.intervalId);
       	trivia.clockRunning = false;
-      	trivia.unanswered--;
 	  	var choice = ($(this).attr("data-option"));
 	  	if (choice == trivia.QA[trivia.questionNum]["correctAnswer"]) {
 	  	  return trivia.win();
@@ -72,28 +85,33 @@ const trivia = {
 
 	timeout () {
 	  $("#time").text("out of time!");
-	  trivia.lose();
+	  trivia.unanswered++;
+	  $("#question").hide();
+	  trivia.goNext();
 	},
 	win () {
 	  $("#display").text("You are right!");
 	  trivia.correctCount++;
-	  $("#wrap").hide();
+	  $("#question").hide();
 	  trivia.goNext();
 	},
 	lose () {
 	  $("#display").text("You are wrong!");
 	  trivia.incorrectCount++;
-	  $("#wrap").hide();
+	  $("#question").hide();
 	  trivia.goNext();
 	},
 	goNext () { 
+	  trivia.questionNum++;
+
 	  setTimeout(function () {
 	  	$("#display").empty();
 	  	$("#time").empty();
-        $("#wrap").show();
+        $("#question").show();
   		trivia.start();
   	  }, 3000);
 	},
+
 	sequenceGenerate (num) { //shuffle and return a random sequence array
 	  var x = 0;
 	  var result = Array.from({length: num}, () => x++);

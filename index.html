@@ -12,16 +12,35 @@
 
 <body>
 	<div id="wrap">
-		<div>
-			<button id="start">start</button>
+		<div class="jumbotron" id="start">
+			<h1>Trivia Game</h1>
+			<button class="btn btn-outline-primary">start</button>
 		</div>
-		<div id="time"></div>
-		<div id="question"></div>
-		<div id="timeup"></div>
+
+		<div class="container w-75">
+
+			<div class="row"> 
+				<div class="col-12">
+					<div id="time" class="text-center"></div>
+				</div> <!-- col -->
+			</div> <!-- row -->
+
+			<div class="row"> 
+				<div class="col-12">
+					<div id="question"></div>
+				</div> <!-- col -->
+			</div> <!-- row -->
+
+			<div class="row"> 
+				<div class="col-12">
+					<div id="display"></div>
+				</div> <!-- col -->
+			</div> <!-- row -->
+
+		</div> <!-- container -->
+
 
 	</div> <!-- wrap -->
-
-	<div id="display"></div>
 
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
 	<!-- link to Jquery -->

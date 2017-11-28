@@ -1,0 +1,29 @@
+#start {
+	text-align: center;
+}
+
+#wrap {
+	background-color: lightblue;
+	min-height: 50%;
+	width: 75%;
+	margin: 0 auto;
+}
+
+#time {
+	height: 50px;
+	margin-top: 10px;
+}
+
+.choice {
+	background-color: white;
+	margin-bottom: 5px;
+}
+
+.choice:hover {
+	background-color: pink;
+	color: blue;
+}
+
+.jumbotron {
+	background-color: lightblue;
+}
