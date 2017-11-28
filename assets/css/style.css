@@ -3,8 +3,8 @@
 }
 
 #wrap {
-	background-color: lightblue;
-	min-height: 50%;
+	background-color: skyblue;
+	min-height: 100%;
 	width: 75%;
 	margin: 0 auto;
 }
@@ -14,16 +14,20 @@
 	margin-top: 10px;
 }
 
+#display {
+	text-align: center;
+}
+
 .choice {
 	background-color: white;
 	margin-bottom: 5px;
 }
 
 .choice:hover {
-	background-color: pink;
+	background-color: orange;
 	color: blue;
 }
 
 .jumbotron {
-	background-color: lightblue;
+	background-color: skyblue;
 }
