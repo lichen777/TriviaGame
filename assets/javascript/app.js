@@ -1,7 +1,7 @@
 const trivia = {
 	correctCount : 0,
 	incorrectCount : 0,
-	unanswered : 0,
+	unanswered : 10,
 	clockRunning : false,
 	questionNum : 0,
 	intervalId : 0,
@@ -55,12 +55,12 @@ const trivia = {
 	  trivia.timer(10); //set clock time.
 	  trivia.makeChoice();
 	  trivia.questionNum++;
-
 	},
 	makeChoice () {
 	  $(".choice").click(function () {
 	  	clearInterval(trivia.intervalId);
       	trivia.clockRunning = false;
+      	trivia.unanswered--;
 	  	var choice = ($(this).attr("data-option"));
 	  	if (choice == trivia.QA[trivia.questionNum]["correctAnswer"]) {
 	  	  return trivia.win();
@@ -72,32 +72,28 @@ const trivia = {
 
 	timeout () {
 	  $("#time").text("out of time!");
-	  trivia.incorrectCount++;
-	  $("#time").click(function () {
-	  	trivia.start();
-	  });
+	  trivia.lose();
 	},
 	win () {
-	  $("#display").text("You win!");
+	  $("#display").text("You are right!");
 	  trivia.correctCount++;
 	  $("#wrap").hide();
-	  $("#display").click(function () {
-    	$("#display").empty();
-    	$("#wrap").show();
-  		trivia.start();
-  	  });	
+	  trivia.goNext();
 	},
 	lose () {
-	  $("#display").text("You Lose!");
+	  $("#display").text("You are wrong!");
 	  trivia.incorrectCount++;
 	  $("#wrap").hide();
-	  $("#display").click(function () {
-    	$("#display").empty();
-    	$("#wrap").show();
-  		trivia.start();
-  	  });
+	  trivia.goNext();
 	},
-
+	goNext () { 
+	  setTimeout(function () {
+	  	$("#display").empty();
+	  	$("#time").empty();
+        $("#wrap").show();
+  		trivia.start();
+  	  }, 3000);
+	},
 	sequenceGenerate (num) { //shuffle and return a random sequence array
 	  var x = 0;
 	  var result = Array.from({length: num}, () => x++);
