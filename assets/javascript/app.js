@@ -49,20 +49,56 @@ const trivia = {
 	  var sequence = trivia.sequenceGenerate (options.length);
 
 	  for (var i = 0; i < options.length; i++) {
-	  	var addLine = $("<div>" + options[sequence[i]] + "</div>").attr("data-option", sequence[i]);
+	  	var addLine = $("<div>" + options[sequence[i]] + "</div>").addClass("choice").attr("data-option", sequence[i]);
 	    $("#question").append(addLine); 
 	  }
 	  trivia.timer(10); //set clock time.
-
+	  trivia.makeChoice();
 	  trivia.questionNum++;
+
 	},
+	makeChoice () {
+	  $(".choice").click(function () {
+	  	clearInterval(trivia.intervalId);
+      	trivia.clockRunning = false;
+	  	var choice = ($(this).attr("data-option"));
+	  	if (choice == trivia.QA[trivia.questionNum]["correctAnswer"]) {
+	  	  return trivia.win();
+	  	}else {
+	  	  return trivia.lose();
+	  	}
+	  });
+	},
+
 	timeout () {
 	  $("#time").text("out of time!");
+	  trivia.incorrectCount++;
 	  $("#time").click(function () {
 	  	trivia.start();
 	  });
 	},
-	sequenceGenerate (num) { //shuffle and return a sequence array
+	win () {
+	  $("#display").text("You win!");
+	  trivia.correctCount++;
+	  $("#wrap").hide();
+	  $("#display").click(function () {
+    	$("#display").empty();
+    	$("#wrap").show();
+  		trivia.start();
+  	  });	
+	},
+	lose () {
+	  $("#display").text("You Lose!");
+	  trivia.incorrectCount++;
+	  $("#wrap").hide();
+	  $("#display").click(function () {
+    	$("#display").empty();
+    	$("#wrap").show();
+  		trivia.start();
+  	  });
+	},
+
+	sequenceGenerate (num) { //shuffle and return a random sequence array
 	  var x = 0;
 	  var result = Array.from({length: num}, () => x++);
 	  for (var i = num - 1; i > 0; i--) {
