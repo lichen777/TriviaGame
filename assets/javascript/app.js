@@ -96,7 +96,7 @@ const trivia = {
 
 	timeout () {
 	  $("#display").html("<div>Out Of Time! Correct answer is <b>" + trivia.QA[trivia.questionNum]["options"][trivia.QA[trivia.questionNum]["correctAnswer"]] + "</b>.</div>");
-	  $("#display").append("<img src=" + trivia.QA[trivia.questionNum]["picture"] + "width = '300px'>");
+	  $("#display").append("<img src=" + trivia.QA[trivia.questionNum]["picture"] + " width = '300px'>");
 	  trivia.unanswered++;
 	  $("#time").empty();
 	  $("#question").hide();
