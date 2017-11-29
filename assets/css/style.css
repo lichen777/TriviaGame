@@ -3,7 +3,7 @@
 }
 
 #wrap {
-	background-color: #9ad3de;
+	background-color: #89bdd3;
 	min-height: 100%;
 	width: 75%;
 	margin: 0 auto;
@@ -25,10 +25,10 @@
 }
 
 .choice:hover {
-	background-color: #89bdd3;
+	background-color: #9ad3de;
 	color: #e3e3e3;
 }
 
 .jumbotron {
-	background-color: #9ad3de;
+	background-color: #89bdd3;
 }
