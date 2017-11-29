@@ -3,10 +3,11 @@
 }
 
 #wrap {
-	background-color: skyblue;
+	background-color: #9ad3de;
 	min-height: 100%;
 	width: 75%;
 	margin: 0 auto;
+	color: #ffffff;
 }
 
 #time {
@@ -19,15 +20,15 @@
 }
 
 .choice {
-	background-color: white;
+	background-color: #c9c9c9;
 	margin-bottom: 5px;
 }
 
 .choice:hover {
-	background-color: orange;
-	color: blue;
+	background-color: #89bdd3;
+	color: #e3e3e3;
 }
 
 .jumbotron {
-	background-color: skyblue;
+	background-color: #9ad3de;
 }
