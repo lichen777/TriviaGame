@@ -53,19 +53,19 @@ const trivia = {
 	  var remainingTime = time;
 	  $("#time").text("Time Remaining: " + remainingTime + " Seconds");
 	  if (!trivia.clockRunning) {
-        trivia.intervalId = setInterval(function () {
-          remainingTime --;
-          $("#time").text("Time Remaining: " + remainingTime + " Seconds");
+            trivia.intervalId = setInterval(function () {
+       		remainingTime --;
+          	$("#time").text("Time Remaining: " + remainingTime + " Seconds");
           
-          //console.log(remainingTime);
-          if(remainingTime == 0) {
-      	    clearInterval(trivia.intervalId);
-      	    trivia.clockRunning = false;
-      	    return trivia.timeout();
+          	//console.log(remainingTime);
+          	if(remainingTime == 0) {
+      	    		clearInterval(trivia.intervalId);
+      	    		trivia.clockRunning = false;
+      	    		return trivia.timeout();
+          	}
+          }, 1000);
+          trivia.clockRunning = true;
           }
-        }, 1000);
-        trivia.clockRunning = true;
-      }
 	},
 	start () {
 	  $("#display").empty();
@@ -84,7 +84,7 @@ const trivia = {
 	makeChoice () {
 	  $(".choice").click(function () {
 	  	clearInterval(trivia.intervalId);
-      	trivia.clockRunning = false;
+      		trivia.clockRunning = false;
 	  	var choice = ($(this).attr("data-option"));
 	  	if (choice == trivia.QA[trivia.questionNum]["correctAnswer"]) {
 	  	  return trivia.win();
@@ -135,7 +135,7 @@ const trivia = {
 	    } else {
 	  	  $("#display").empty();
 	  	  $("#time").empty();
-          $("#question").show();
+          	  $("#question").show();
   		  trivia.start();
   		}
   	  }, 3000);
